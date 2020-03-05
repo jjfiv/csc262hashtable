@@ -1,37 +1,37 @@
-#include "assoc_list.h"
+#include "hashtable.h"
 
 int main(void) {
-	AssocList_t* dictionary = assoc_new();
+	HashTable_t* dictionary = hash_new();
     
-    assert(assoc_size(dictionary) == 0);
+    assert(hash_size(dictionary) == 0);
     
-    assoc_put(dictionary, bytes_copy_str("A"), bytes_copy_str("a"));
-    assert(assoc_get(dictionary, bytes_copy_str("a")) == NULL);
-    assert(assoc_get(dictionary, bytes_copy_str("B")) == NULL);
-    assert(bytes_eqc(assoc_get(dictionary, bytes_copy_str("A")), "a"));
-    assert(1 == assoc_size(dictionary));
+    hash_put(dictionary, bytes_copy_str("A"), bytes_copy_str("a"));
+    assert(hash_get(dictionary, bytes_copy_str("a")) == NULL);
+    assert(hash_get(dictionary, bytes_copy_str("B")) == NULL);
+    assert(bytes_eqc(hash_get(dictionary, bytes_copy_str("A")), "a"));
+    assert(1 == hash_size(dictionary));
 
-    assoc_put(dictionary, bytes_copy_str("B"), bytes_copy_str("b"));
-    assert(assoc_get(dictionary, bytes_copy_str("a")) == NULL);
-    assert(assoc_get(dictionary, bytes_copy_str("b")) == NULL);
-    assert(bytes_eqc(assoc_get(dictionary, bytes_copy_str("A")), "a"));
-    assert(bytes_eqc(assoc_get(dictionary, bytes_copy_str("B")), "b"));
-    assert(2 == assoc_size(dictionary));
+    hash_put(dictionary, bytes_copy_str("B"), bytes_copy_str("b"));
+    assert(hash_get(dictionary, bytes_copy_str("a")) == NULL);
+    assert(hash_get(dictionary, bytes_copy_str("b")) == NULL);
+    assert(bytes_eqc(hash_get(dictionary, bytes_copy_str("A")), "a"));
+    assert(bytes_eqc(hash_get(dictionary, bytes_copy_str("B")), "b"));
+    assert(2 == hash_size(dictionary));
 
-    assoc_clear(dictionary);
-    assert(assoc_size(dictionary) == 0);
+    hash_clear(dictionary);
+    assert(hash_size(dictionary) == 0);
     
-    assoc_put(dictionary, bytes_copy_str("A"), bytes_copy_str("a"));
-    assoc_put(dictionary, bytes_copy_str("B"), bytes_copy_str("b"));
-    assoc_remove(dictionary, bytes_copy_str("B"));
+    hash_put(dictionary, bytes_copy_str("A"), bytes_copy_str("a"));
+    hash_put(dictionary, bytes_copy_str("B"), bytes_copy_str("b"));
+    hash_remove(dictionary, bytes_copy_str("B"));
     
-    assert(assoc_get(dictionary, bytes_copy_str("a")) == NULL);
-    assert(assoc_get(dictionary, bytes_copy_str("B")) == NULL);
-    assert(bytes_eqc(assoc_get(dictionary, bytes_copy_str("A")), "a"));
-    assert(1 == assoc_size(dictionary));
+    assert(hash_get(dictionary, bytes_copy_str("a")) == NULL);
+    assert(hash_get(dictionary, bytes_copy_str("B")) == NULL);
+    assert(bytes_eqc(hash_get(dictionary, bytes_copy_str("A")), "a"));
+    assert(1 == hash_size(dictionary));
     
-    assoc_remove(dictionary, bytes_copy_str("A"));
-    assert(0 == assoc_size(dictionary));
+    hash_remove(dictionary, bytes_copy_str("A"));
+    assert(0 == hash_size(dictionary));
 
     return 0;
 }

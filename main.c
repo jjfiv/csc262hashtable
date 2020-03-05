@@ -1,4 +1,4 @@
-#include "assoc_list.h"
+#include "hashtable.h"
 #include "bytes.h"
 #include <ctype.h>
 #include <stdlib.h>
@@ -140,7 +140,7 @@ static int read_maybe_quoted(bytes_t* buffer, int start, bytes_t* output) {
 }
 
 int main(void) {
-	AssocList_t* dictionary = assoc_new();
+	HashTable_t* dictionary = hash_new();
 
 	bytes_t line_buffer; // stack-allocate buffer class
 	bytes_init(&line_buffer); // initialize buffer variables
@@ -172,11 +172,11 @@ int main(void) {
 		
 		if (bytes_eqc(&line_buffer, "clear")) {
 			// No printing needed.
-			assoc_clear(dictionary);
+			hash_clear(dictionary);
 			continue;
 		} else if (bytes_eqc(&line_buffer, "size")) {
 			// Print hte size!
-			printf("%zu\n", assoc_size(dictionary));
+			printf("%zu\n", hash_size(dictionary));
 			continue;
 		}
 
@@ -212,7 +212,7 @@ int main(void) {
 				continue;
 			}
 			// insert: (key and value memory become owned by dictionary!)
-			assoc_put(dictionary, key, value);
+			hash_put(dictionary, key, value);
 		} else if (bytes_eqc(word, "get")) {
 			bytes_t* key = bytes_new_empty();
 			// read from there to the end of the key:
@@ -224,7 +224,7 @@ int main(void) {
 				continue;
 			}
 			// Look it up in the dictionary:
-			bytes_t* maybe_found = assoc_get(dictionary, key);
+			bytes_t* maybe_found = hash_get(dictionary, key);
 			if (maybe_found == NULL) {
 				puts("NOT-FOUND");
 			} else {
@@ -244,7 +244,7 @@ int main(void) {
 				continue;
 			}
 			// Remove from the dictionary:
-			assoc_remove(dictionary, key);
+			hash_remove(dictionary, key);
 			// Release the key when we're done with it!
 			bytes_free(key);
 		}

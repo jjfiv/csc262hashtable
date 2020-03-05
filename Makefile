@@ -24,9 +24,9 @@ test: test_bytes test_assoc
 test_bytes: bytes.o test_bytes.o
 	$(CC) $^ -o $@
 
-test_assoc: bytes.o assoc_list.o test_assoc.o
+test_assoc: bytes.o hashtable.o test_assoc.o
 	$(CC) $^ -o $@
 
-main: main.o bytes.o assoc_list.o
+main: main.o bytes.o hashtable.o
 	$(CC) $^ -o $@
 
