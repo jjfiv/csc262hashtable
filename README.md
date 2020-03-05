@@ -38,7 +38,7 @@ Since ``hash_remove`` is the most difficult method, it is worth additional point
 
 ### Growing HashTable_t (20+):
 
-There are two ``private`` methods in ``hashtable.c``: 
+There are two ``private`` methods in ``hashtable.c``; ``static`` on a function in ``C`` is like ``private`` in Java -- it means that the function is only visible in the current file.
 
  - ``boolean hash_should_resize(HashTable_t *self)`` should be complete already.
  - (12) ``void hash_resize(HashTable_t* self)`` needs work. I suggest using ``calloc`` to create another new array, since it fills it with zeros (NULLs).
