@@ -20,6 +20,7 @@ static void hash_resize(HashTable_t* self) {
 	// TODO: allocate a new set of buckets; copy data over!
 }
 
+// Return true if the hash table should grow:
 static bool hash_should_resize(HashTable_t* self) {
 	if (self->buckets == NULL) {
 		return true;

@@ -251,6 +251,9 @@ int main(void) {
 		bytes_free(word);
 	}
 
-	// Going to let the OS clean up our data structures, this time.
+	// NOT going to let the OS clean up our data structures, this time.
+  hash_clear(dictionary);
+  free(dictionary);
+
 	return 0;
 }
