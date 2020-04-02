@@ -154,7 +154,7 @@ int main(void) {
 		ssize_t amount_read = bytes_readline(stdin, &line_buffer);
 		if (amount_read == -1) {
 			// EOF or quit:
-			return 0;
+			break;
 		} 
 		
 		// Delete extraneous whitespace!
@@ -162,7 +162,7 @@ int main(void) {
 
 		// If they want to quit, let them.
 		if (bytes_eqc(&line_buffer, "quit")) {
-			return 0;
+			break;
 		}
 		// If they didn't type anything, wait for next line of input.
 		if (bytes_size(&line_buffer) == 0) {
